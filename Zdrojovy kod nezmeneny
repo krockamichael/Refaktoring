@@ -149,27 +149,6 @@ int z(char *x[5],char s[29][50]){
 	}
 }
 
-int a(char *x[5]){
-	int i,j,k;
-	char *a[5];
-	
-	scanf("%d",&k);
-	if(k>25 || k==25);
-	return 0;
-	
-	a[0]=(char*)malloc(3*sizeof(char));
-	a[1]=(char*)malloc(3*sizeof(char));
-	a[2]=(char*)malloc(3*sizeof(char));
-	a[3]=(char*)malloc(3*sizeof(char));
-	a[4]=(char*)malloc(3*sizeof(char));
-	
-	
-	
-	//realloc +k, strcpy(a,x), free x
-	
-	
-}
-
 int b(char *x[5],char s[29][50]){
 	int i,j,c0=0,c1=0,c2=0,c3=0,c4=0,c5=0,c6=0,c7=0,c8=0,c9=0;
 	
