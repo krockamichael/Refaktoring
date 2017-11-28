@@ -10,29 +10,27 @@ int vypis(char s[29][50]){
 
 	if((fr = fopen("C:\\Users\\krock\\Desktop\\FIIT\\PP\\Projekt 1\\predaj.txt", "r")) == NULL)          //otvorenie a otestovanie spravneho otvorenia suboru
 	printf("Neotvoreny subor\n");
-	
-	for(i=0;i<29;i++){											//do dvojrozmerneho pola nacitam po riadkoch udaje zo suboru predaj.txt
-	printf("meno priezvisko: %s",fgets(s[i],50,fr));
-	p = strchr(s[i++], '\n');									//vyhladanie a nasledne odstranenie \n
-	if(p) *p = 0;											
-	printf("SPZ: %s",fgets(s[i],50,fr));
+
+	for(i=0;i<29;i++){						//do dvojrozmerneho pola nacitam po riadkoch udaje zo suboru predaj.txt
+	printf("meno priezvisko: %s",fgets(s[i],50,fr));										
+	printf("SPZ: %s",fgets(s[i],50,fr));				//vyhladanie a nasledne odstranenie \n
 	p = strchr(s[i++], '\n');
 	if(p) *p = 0;
 	printf("typ auta: %s",fgets(s[i],50,fr));
-	p = strchr(s[i++], '\n');
-	if(p) *p = 0;
 	printf("cena: %s",fgets(s[i],50,fr));
 	p = strchr(s[i++], '\n');
 	if(p) *p = 0;
 	printf("datum: %s",fgets(s[i],50,fr));
 	p = strchr(s[i++], '\n');
 	if(p) *p = 0;
-	if(i==29) {													//ak je to posledny riadok v subore tak odriadkujem a konci forcyklus
+	if(i==29) {							//ak je to posledny riadok v subore tak odriadkujem a konci forcyklus
 	printf("\n");
-	break;}
+	break;
+	}
 	else
 	printf("%s",fgets(s[i],50,fr));
 	}
+	
 	rewind(fr); 
 }
 
@@ -42,19 +40,19 @@ void odmeny(char s[29][50]){
 	
 	if(s[0][0] != '\0'){									
 		scanf("%d",&dnesny_datum);
-		for(i=4;i<=28;i+=6,j++){								//konvertuje dnesny datum na int
+		for(i=4;i<=28;i+=6,j++){						//konvertuje dnesny datum na int
 			sscanf(s[i],"%d",&datum_txt[j]);
 		}
-		for(j=0,i=3;i<=27;i+=6,j++){							//konvertuje cenu z predaj.txt na float
+		for(j=0,i=3;i<=27;i+=6,j++){						//konvertuje cenu z predaj.txt na float
 			sscanf(s[i],"%f",&cena_txt[j]);
 		}
 		for(i=j=0;i<5;i++,j+=6){             					//s[j] su pozicie v txt subore na ktorom su mena predavajucich, s[j+1] su SPZ, s[j+2] su typy aut (nove/stare)
 			if(dnesny_datum-datum_txt[i]>=10000){				//ak je rozdiel datumov vacsi ako 1 rok tak nastane vypis mena, SPZ a odmeny
-				if(s[j+2][0]=='1'){								//ak je nove auto dostane 1.5% z ceny ako odmenu
+				if(s[j+2][0]=='1'){					//ak je nove auto dostane 1.5% z ceny ako odmenu
 				c=cena_txt[i]/100;
 				c*=1.5;
 				}	
-				else{											//ak stare tak 2.2%
+				else{							//ak stare tak 2.2%
 				c=cena_txt[i]/100;
 				c*=2.2;
 				}
@@ -68,13 +66,13 @@ void palindrom(char s[29][50]){
 	char a[5][7];
 	int i,j;
 	
-	if(s[0][0] == '\0')									//kontrola ci je vytvorene pole otestovanim prveho clena pola
+	if(s[0][0] == '\0')							//kontrola ci je vytvorene pole otestovanim prveho clena pola
 	printf("Pole nie je vytvorene\n");
 	else
 	for(i=0,j=1;i<5;i++,j+=6){
-	strcpy(a[i],s[j]);									//kopirovanie SPZtiek do noveho pola
-	strrev(a[i]);										//otocenie SPZ v novom poli
-	if(strcmp(a[i],s[j]) == 0)							//porovnanie povodnej SPZ a otocenej SPZ
+	strcpy(a[i],s[j]);							//kopirovanie SPZtiek do noveho pola
+	strrev(a[i]);								//otocenie SPZ v novom poli
+	if(strcmp(a[i],s[j]) == 0)						//porovnanie povodnej SPZ a otocenej SPZ
 	printf("%c%c\n",a[i][0],a[i][1]);					//vypis prvych dvoch pismen zo SPZ ktore su palindromami
 	}
 }
@@ -83,7 +81,7 @@ void n(char *x[5]){
 	int i,pocet;
 	char q;
 	
-	for(i=0;i<219;i++){							//spocitanie poctu zaznamov v textovom subore predaj.txt
+	for(i=0;i<219;i++){						//spocitanie poctu zaznamov v textovom subore predaj.txt
 		q=getc(fr);
 		if(q=='\n')
 		pocet++;
@@ -91,7 +89,7 @@ void n(char *x[5]){
 	
 	fseek(fr, 11, SEEK_SET);					//nastavenie na poziciu 1. SPZ v textovom subore predaj.txt
 	x[0]=(char*)malloc(9*sizeof(char));			
-	fgets(x[0],9,fr);							//zapisanie SPZ do pola
+	fgets(x[0],9,fr);						//zapisanie SPZ do pola
 	
 	fseek(fr, 63, SEEK_SET);					//nastavenie na poziciu 2. SPZ v textovom subore predaj.txt
 	x[1]=(char*)malloc(9*sizeof(char));
@@ -113,7 +111,7 @@ void n(char *x[5]){
 void SPZ(char *x[5],char s[29][50]){
 	int i,j;
 	
-	if(s[0][0]=='\0')									//kontrola ci je vytvorene pole otestovanim prveho clena pola
+	if(s[0][0]=='\0')						//kontrola ci je vytvorene pole otestovanim prveho clena pola
 	printf("Pole nie je vytvorene\n");
 	else
 	for(i=0;i<5;i++){
@@ -128,7 +126,7 @@ void SPZ(char *x[5],char s[29][50]){
 int z(char *x[5],char s[29][50]){
 	int i,BA=0,BL=0,SC=0;
 	
-	if(s[0][0]=='\0')									//kontrola ci je vytvorene pole otestovanim prveho clena pola
+	if(s[0][0]=='\0')						//kontrola ci je vytvorene pole otestovanim prveho clena pola
 	return 0;
 	else{	
 	for(i=0;i<5;i++){
@@ -208,7 +206,7 @@ int main(){
 	char c,s[29][50],*x[5];
 	
 	while(1){    
-	if(scanf("%c",&c) <= 0)								//nacitanie znaku a vyvolanie prislusnej funkcie
+	if(scanf("%c",&c) <= 0)						//nacitanie znaku a vyvolanie prislusnej funkcie
 	break;
 	if(c =='v')
 		vypis(s);
